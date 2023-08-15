@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        MERCHANT FORM
+    </title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  
+</head>
+<body>
+<h1>Merchant Form</h1>
+                <form  id="myForm" onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
+                    <div>
+                        <label>Name*</label><label class="validation-error hide" id="firstnameValidationError">This field is required.</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+                    <div>
+                        <label>Email*</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div>
+                        <label>*PhoneNumber</label>
+                        <input type="tel" name="number" id="number" maxlength="10">
+                    </div>
+                    <div>
+                    <label for="website">*website</label>
+                    <input type="text" id="website" name="website">
+                    </div>
+                    <div>
+                    <label for="contactname">contactname</label>
+                    <input type="text" id="contact" name="contact">
+                    </div>
+                    <div>
+                    <label for="phone">contactnumber</label>
+                    <input type="tel" id="phone" name="phone" maxlength="10">
+                    </div>
+                    <div>
+                    <label for="email">ContactMail</label>
+                    <input type="email" id="another" name="another">
+                    </div>
+                    <div>
+                    <label for="notes">Notes</label>
+                    <textarea name="notes" id="notes" cols="30" rows="1"></textarea>
+                    </div>
+                    <div>
+                     <label for="type">Type:</label>
+                     <label for="Small">Small buisiness</label>
+                     <input type="radio" name="small" id="small" value="small buisiness">
+                     <label for="entre">Entreprise</label>
+                     <input type="radio" name="entreprise" id="small" value="small">
+                     <label for="entreprenuer">Entreprenuer</label>
+                     <input type="radio" name="entreprenuer" id="small" value="small">
+                     </div>
+                     <div>
+                     <label for="category"> category</label>
+                     <select name="category" id="category">
+                        <option value="clothes">clothes</option>
+                        <option value="toys">toys</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="digital">Digital</option>
+                     </select>
+                     </div>
+                     <div>
+                     <label for="comm">commmission</label>
+                     <input type="tel" name="commission" id="commission">;
+                     </div>
+                     <div>
+                     <label for="activeform">Activeform</label>
+                     <input type="date" name="date" id="date">
+                     </div>
+                     <div>
+                     <label for="logo">LOGO</label>
+                     <input type="file" name="file" id="file">
+                     </div>
+                     <div>
+                     <label for="critical account">Critical Account</label>
+                     <label for="yes">YES</label>
+                     <input type="checkbox" name="yes" id="yes" value="Yes">
+                     <label for="NO">NO</label>
+                     <input type="checkbox" name="yes" id="yes" value="yes">
+                     </div>
+                     <div>
+                    <label for="payment">Payment</label>
+                    <input type="checkbox" name="payment" id="payment" value="cash on Payment">
+                    <input type="checkbox" name="payment" id="payment" value="UPI">
+                    <input type="checkbox" name="payment" id="payment" value="Card Payment">
+                    </div>
+            
+                    
+                    <div  class="form-action-buttons">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+                <table  id="employeeList">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>PhoneNumber</th>
+                            <th>website</th>
+                            <th>contactname</th>
+                            <th>contactnumber</th>
+                            <th>ContactMail</th>
+                            <th>Notes</th>
+                            <th>Type</th>
+                            <th>category</th>
+                            <th>commmission</th>
+                            <th>Activeform</th>
+                            <th>LOGO</th>
+                            <th>Critical Account</th>
+                            <th>Payment</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+    <script src="java.js"></script>
+ </body>
