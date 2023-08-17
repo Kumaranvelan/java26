@@ -1,3 +1,4 @@
+
 document.getElementById("myForm")
 document.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -6,14 +7,20 @@ document.addEventListener("submit", function (event) {
     var data = {}
     for(let x of formData.entries()){
         data[x[0]] = x[1]
-        `${console.log(x[0])}:${x[1]}`;
+        console.log(x[0]+":"+x[1]);
     }
-    console.log(data,'data')
-    localStorage.setItem('data', JSON.stringify(data))
+    console.log(formData);
+    console.log('data')
+    const jsonData =JSON.stringify(formData) 
+    localStorage.setItem('formData',JSON.stringify('storedData'));
+    const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+    
+    storedData.push(data);
 
+    localStorage.setItem('formData', JSON.stringify(storedData));
   });
 
-var values = null
+var values = null;
 function onFormSubmit() {
     if (validate()) {
         var formData = readFormData();
@@ -26,6 +33,9 @@ function onFormSubmit() {
 }
 function readFormData() {
     var formData = {};
+    var selectedSmallType = getSelectedRadioValue("small");
+    
+
     formData["name"] = document.getElementById("name").value;
     formData["email"] = document.getElementById("email").value;
     formData["number"] = document.getElementById("number").value;
@@ -34,17 +44,22 @@ function readFormData() {
     formData["phone"] = document.getElementById("phone").value;
     formData["another"] = document.getElementById("another").value;
     formData["notes"] = document.getElementById("notes").value;
-    formData["small"] = document.getElementById("small").value;
+    formData["small"] = selectedSmallType;
     formData["category"] = document.getElementById("category").value;
     formData["commission"] = document.getElementById("commission").value;
     formData["date"] = document.getElementById("date").value;
     formData["file"] = document.getElementById("file").value;
-    formData["yes"] = document.getElementById("yes").value;
+    formData["yes"] = isCheckboxChecked("yes") ? "yes":"no";
+    formData["no"] = isCheckboxChecked("no") ? "yes":"no";
     formData["payment"] = document.getElementById("payment").value;
     
-
+    localStorage.setItem("data", JSON.stringify(formData));
+    console.log(formData);
     return formData;
 }
+
+
+
 function insertNewRecord(data) {
     var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
     var newRow = table.insertRow(table.length);
@@ -81,7 +96,10 @@ function insertNewRecord(data) {
     cell16 = newRow.insertCell(15);
     cell16.innerHTML = `<a onClick="onEdit(this)">Edit</a>
                        <a onClick="onDelete(this)">Delete</a>`;
-}
+
+    
+
+                    }
 function resetForm() {
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
@@ -92,7 +110,7 @@ function resetForm() {
     document.getElementById("phone").value = "";
     document.getElementById("another").value = "";
     document.getElementById("notes").value = "";
-    document.getElementById("small").value = "";
+    document.getElementById("small");
     document.getElementById("category").value = "";
     document.getElementById("commission").value = "";
     document.getElementById("date").value = "";
@@ -125,7 +143,7 @@ function updateRecord(formData) {
     values.cells[1].innerHTML = formData.email;
     values.cells[2].innerHTML = formData.number;
     values.cells[3].innerHTML = formData.website;
-    values.cells[4].innerHTML = formdata.contact;
+    values.cells[4].innerHTML = formData.contact;
     values.cells[5].innerHTML = formData.phone; 
     values.cells[6].innerHTML = formData.another;
     values.cells[7].innerHTML = formData.notes;
@@ -136,7 +154,8 @@ function updateRecord(formData) {
     values.cells[12].innerHTML = formData.file;
     values.cells[13].innerHTML = formData.yes;
     values.cells[14].innerHTML = formData.payment;
-    
+
+
 }
 function onDelete(td) {
     if (confirm('Sure..you wanna delete this ?')) {
@@ -144,6 +163,7 @@ function onDelete(td) {
         document.getElementById("employeeList").deleteRow(row.rowIndex);
         resetForm();
     }
+
 }
 function validate() {
     isValid = true;
@@ -157,3 +177,22 @@ function validate() {
     }
     return isValid;
 }
+  
+   
+
+function isCheckboxChecked(checkboxId) {
+    return document.getElementById(checkboxId).checked;
+}
+
+function getSelectedRadioValue(radioGroupName) {
+    var radioButtons = document.getElementsByName(radioGroupName);
+
+    for (var i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) {
+            return radioButtons[i].value;
+        }
+    }
+
+    return null; // Return null if none is selected
+}
+
