@@ -1,24 +1,4 @@
 
-document.getElementById("myForm")
-document.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const form  = event.target; 
-    const formData = new FormData(form)
-    var data = {}
-    for(let x of formData.entries()){
-        data[x[0]] = x[1]
-        console.log(x[0]+":"+x[1]);
-    }
-    console.log(formData);
-    console.log('data')
-    const jsonData =JSON.stringify(formData) 
-    localStorage.setItem('formData',JSON.stringify('storedData'));
-    const storedData = JSON.parse(localStorage.getItem('formData')) || [];
-    
-    storedData.push(data);
-
-    localStorage.setItem('formData', JSON.stringify(storedData));
-  });
 
 var values = null;
 function onFormSubmit() {
@@ -31,8 +11,12 @@ function onFormSubmit() {
         resetForm();
     }
 }
+
+
+
 function readFormData() {
-    var formData = {};
+    var formData = {}
+    ;
     var selectedSmallType = getSelectedRadioValue("small");
     
 
@@ -53,12 +37,13 @@ function readFormData() {
     formData["no"] = isCheckboxChecked("no") ? "yes":"no";
     formData["payment"] = document.getElementById("payment").value;
     
-    localStorage.setItem("data", JSON.stringify(formData));
+   
     console.log(formData);
     return formData;
 }
 
 
+var formdataarray =[];
 
 function insertNewRecord(data) {
     var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
@@ -97,9 +82,12 @@ function insertNewRecord(data) {
     cell16.innerHTML = `<a onClick="onEdit(this)">Edit</a>
                        <a onClick="onDelete(this)">Delete</a>`;
 
+    formdataarray.push(data);
     
+    localStorage.setItem('formdataarray',JSON.stringify(formdataarray));
 
                     }
+
 function resetForm() {
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
@@ -119,6 +107,7 @@ function resetForm() {
     document.getElementById("payment").value = "";
     values = null;
 }
+
 function onEdit(td) {
     values = td.parentElement.parentElement;
     document.getElementById("name").value = values.cells[0].innerHTML;
@@ -129,13 +118,16 @@ function onEdit(td) {
     document.getElementById("phone").value = values.cells[5].innerHTML;
     document.getElementById("another").value = values.cells[6].innerHTML;
     document.getElementById("notes").value = values.cells[7].innerHTML;
-    document.getElementById("small").value = values.cells[8].innerHTML;
+    document.getElementById("small");
     document.getElementById("category").value = values.cells[9].innerHTML;
     document.getElementById("commission").value = values.cells[10].innerHTML;
     document.getElementById("date").value = values.cells[11].innerHTML;
     document.getElementById("file").value = values.cells[12].innerHTML;
     document.getElementById("yes").value = values.cells[13].innerHTML;
     document.getElementById("payment").value = values.cells[14].innerHTML;
+
+    localStorage.setItem('formdataarray',JSON.stringify(formdataarray));
+    // var storedarray=localStorage.getItem('formdataarray');
 
 }
 function updateRecord(formData) {
